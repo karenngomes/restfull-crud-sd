@@ -32,14 +32,16 @@ export class ProductController {
   }
 
   @Put(':id')
-  async update(@Param('id') id, @Body() productData: Product): Promise<any> {
+  async update(@Param('id') id, @Body() productData: Product): Promise<object> {
     productData.id = Number(id);
     console.log('Updating #', +productData.id);
-    return this.productService.update(productData);
+    await this.productService.update(productData);
+    return { message: 'updated' };
   }
 
   @Delete(':id')
-  async delete(@Param('id') id): Promise<any> {
-    return this.productService.delete(id);
+  async delete(@Param('id') id): Promise<object> {
+    await this.productService.delete(id);
+    return { message: 'deleted'};
   }
 }
